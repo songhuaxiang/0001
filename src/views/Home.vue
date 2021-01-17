@@ -1,18 +1,55 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="up-header">
+      <Header ref="son" />
+    </div>
+    <div class="down">
+      <Menu class="menu" />
+      <router-view class="content" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Header from "@/components/Header.vue";
+import Menu from "@/components/Menu.vue";
 
 export default {
-  name: "Home",
+  data() {
+    return {
+      userinfo: "",
+    };
+  },
   components: {
-    HelloWorld
-  }
+    Header,
+    Menu,
+  },
+  mounted() {
+    this.$refs.son.getinfo(this.userinfo);
+  },
 };
 </script>
+
+<style lang="less" scoped>
+.home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .up-header {
+    flex: 1;
+  }
+  .down {
+    flex: 9;
+    // background: green;
+    display: flex;
+    .menu {
+      flex: 3;
+      background: rgb(4, 109, 74);
+    }
+    .content {
+      flex: 13;
+      // background: greenyellow;
+    }
+  }
+}
+</style>
